@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skru_table/features/player/presentation/cubit/player_cubit.dart';
 import 'package:skru_table/features/player/presentation/pages/table_screen.dart';
+import 'package:skru_table/theme.dart';
 import 'package:wakelock/wakelock.dart';
 
 void main() {
@@ -32,6 +33,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    const MaterialTheme materialTheme = MaterialTheme(TextTheme());
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -40,10 +42,9 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
+        theme: materialTheme.light(),
+        darkTheme: materialTheme.dark(),
+        themeMode: ThemeMode.system,
         home: const TableScreen(),
       ),
     );

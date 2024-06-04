@@ -1,10 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:skru_table/features/player/data/models/rounds_model.dart';
 import 'package:skru_table/features/player/data/models/user_model.dart';
 import 'package:skru_table/features/player/presentation/widgets/cell_widget.dart';
-import 'package:skru_table/users_and_result_list.dart';
 
 part 'player_state.dart';
 
@@ -13,31 +11,31 @@ class PlayerCubit extends Cubit<PlayerState> {
 
   void addNewPlayer(String playerName) {
     // Adding a new DataColumn for the new player
-    List<DataColumn> updatedUsers = [
+    List<UserModel> updatedUsers = [
       ...state.users,
-      DataColumn(label: Text(playerName))
+      UserModel(userName: playerName)
     ];
 
     // Adding a new TextEditingController for each round
     List<TextEditingController> newFirstRoundControllers = [
-      ...state.resultsOfFirstRounds?.listOfTheRoundControllers ?? [],
-      TextEditingController(text: '1'),
+      ...state.resultsOfFirstRounds.listOfTheRoundControllers,
+      TextEditingController(text: '0'),
     ];
     List<TextEditingController> newSecondRoundControllers = [
-      ...state.resultsOfSecondRounds?.listOfTheRoundControllers ?? [],
-      TextEditingController(text: '1'),
+      ...state.resultsOfSecondRounds.listOfTheRoundControllers,
+      TextEditingController(text: '0'),
     ];
     List<TextEditingController> newThirdRoundControllers = [
-      ...state.resultsOfThirdRounds?.listOfTheRoundControllers ?? [],
-      TextEditingController(text: '1'),
+      ...state.resultsOfThirdRounds.listOfTheRoundControllers,
+      TextEditingController(text: '0'),
     ];
     List<TextEditingController> newFourthRoundControllers = [
-      ...state.resultsOfFourthRounds?.listOfTheRoundControllers ?? [],
-      TextEditingController(text: '1'),
+      ...state.resultsOfFourthRounds.listOfTheRoundControllers,
+      TextEditingController(text: '0'),
     ];
     List<TextEditingController> newFifthRoundControllers = [
-      ...state.resultsOfFifthRounds?.listOfTheRoundControllers ?? [],
-      TextEditingController(text: '1'),
+      ...state.resultsOfFifthRounds.listOfTheRoundControllers,
+      TextEditingController(text: '0'),
     ];
 
     // Updating the state
@@ -45,7 +43,7 @@ class PlayerCubit extends Cubit<PlayerState> {
       users: updatedUsers,
       resultsOfFirstRounds: RoundsModel(
         resultOfTheRound: [
-          ...state.resultsOfFirstRounds?.resultOfTheRound ?? [],
+          ...state.resultsOfFirstRounds.resultOfTheRound,
           DataCell(CellWidget(
             textEditingController: newFirstRoundControllers.last,
             onValueChanged: (value) => onValueChangedTextField(value),
@@ -55,7 +53,7 @@ class PlayerCubit extends Cubit<PlayerState> {
       ),
       resultsOfSecondRounds: RoundsModel(
         resultOfTheRound: [
-          ...state.resultsOfSecondRounds?.resultOfTheRound ?? [],
+          ...state.resultsOfSecondRounds.resultOfTheRound,
           DataCell(CellWidget(
             textEditingController: newSecondRoundControllers.last,
             onValueChanged: (value) => onValueChangedTextField(value),
@@ -65,7 +63,7 @@ class PlayerCubit extends Cubit<PlayerState> {
       ),
       resultsOfThirdRounds: RoundsModel(
         resultOfTheRound: [
-          ...state.resultsOfThirdRounds?.resultOfTheRound ?? [],
+          ...state.resultsOfThirdRounds.resultOfTheRound,
           DataCell(CellWidget(
             textEditingController: newThirdRoundControllers.last,
             onValueChanged: (value) => onValueChangedTextField(value),
@@ -75,7 +73,7 @@ class PlayerCubit extends Cubit<PlayerState> {
       ),
       resultsOfFourthRounds: RoundsModel(
         resultOfTheRound: [
-          ...state.resultsOfFourthRounds?.resultOfTheRound ?? [],
+          ...state.resultsOfFourthRounds.resultOfTheRound,
           DataCell(CellWidget(
             textEditingController: newFourthRoundControllers.last,
             onValueChanged: (value) => onValueChangedTextField(value),
@@ -85,7 +83,7 @@ class PlayerCubit extends Cubit<PlayerState> {
       ),
       resultsOfFifthRounds: RoundsModel(
         resultOfTheRound: [
-          ...state.resultsOfFifthRounds?.resultOfTheRound ?? [],
+          ...state.resultsOfFifthRounds.resultOfTheRound,
           DataCell(CellWidget(
             textEditingController: newFifthRoundControllers.last,
             onValueChanged: (value) => onValueChangedTextField(value),
@@ -105,38 +103,38 @@ class PlayerCubit extends Cubit<PlayerState> {
       state.copyWith(
         users: state.users..removeAt(index),
         resultsOfFirstRounds: RoundsModel(
-          resultOfTheRound: state.resultsOfFirstRounds!.resultOfTheRound
+          resultOfTheRound: state.resultsOfFirstRounds.resultOfTheRound
             ..removeAt(index),
           listOfTheRoundControllers:
-              state.resultsOfFirstRounds!.listOfTheRoundControllers
+              state.resultsOfFirstRounds.listOfTheRoundControllers
                 ..removeAt(index),
         ),
         resultsOfSecondRounds: RoundsModel(
-          resultOfTheRound: state.resultsOfSecondRounds!.resultOfTheRound
+          resultOfTheRound: state.resultsOfSecondRounds.resultOfTheRound
             ..removeAt(index),
           listOfTheRoundControllers:
-              state.resultsOfSecondRounds!.listOfTheRoundControllers
+              state.resultsOfSecondRounds.listOfTheRoundControllers
                 ..removeAt(index),
         ),
         resultsOfThirdRounds: RoundsModel(
-          resultOfTheRound: state.resultsOfThirdRounds!.resultOfTheRound
+          resultOfTheRound: state.resultsOfThirdRounds.resultOfTheRound
             ..removeAt(index),
           listOfTheRoundControllers:
-              state.resultsOfThirdRounds!.listOfTheRoundControllers
+              state.resultsOfThirdRounds.listOfTheRoundControllers
                 ..removeAt(index),
         ),
         resultsOfFourthRounds: RoundsModel(
-          resultOfTheRound: state.resultsOfFourthRounds!.resultOfTheRound
+          resultOfTheRound: state.resultsOfFourthRounds.resultOfTheRound
             ..removeAt(index),
           listOfTheRoundControllers:
-              state.resultsOfFourthRounds!.listOfTheRoundControllers
+              state.resultsOfFourthRounds.listOfTheRoundControllers
                 ..removeAt(index),
         ),
         resultsOfFifthRounds: RoundsModel(
-          resultOfTheRound: state.resultsOfFifthRounds!.resultOfTheRound
+          resultOfTheRound: state.resultsOfFifthRounds.resultOfTheRound
             ..removeAt(index),
           listOfTheRoundControllers:
-              state.resultsOfFifthRounds!.listOfTheRoundControllers
+              state.resultsOfFifthRounds.listOfTheRoundControllers
                 ..removeAt(index),
         ),
       ),
@@ -148,22 +146,20 @@ class PlayerCubit extends Cubit<PlayerState> {
     List<DataCell> totalPointsList = List.generate(state.users.length, (index) {
       int resultOfEachPlayer = 0;
       resultOfEachPlayer += int.parse(
-          state.resultsOfFirstRounds!.listOfTheRoundControllers[index].text);
+          state.resultsOfFirstRounds.listOfTheRoundControllers[index].text);
       resultOfEachPlayer += int.parse(
-          state.resultsOfSecondRounds!.listOfTheRoundControllers[index].text);
+          state.resultsOfSecondRounds.listOfTheRoundControllers[index].text);
       resultOfEachPlayer += int.parse(
-          state.resultsOfThirdRounds!.listOfTheRoundControllers[index].text);
+          state.resultsOfThirdRounds.listOfTheRoundControllers[index].text);
       resultOfEachPlayer += int.parse(
-          state.resultsOfFourthRounds!.listOfTheRoundControllers[index].text);
+          state.resultsOfFourthRounds.listOfTheRoundControllers[index].text);
       resultOfEachPlayer += int.parse(
-          state.resultsOfFifthRounds!.listOfTheRoundControllers[index].text);
-      print(resultOfEachPlayer);
+          state.resultsOfFifthRounds.listOfTheRoundControllers[index].text);
       return DataCell(Center(
         child: Text(
           resultOfEachPlayer.toString(),
-          style:
-              const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
           textAlign: TextAlign.center,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
       ));
     });

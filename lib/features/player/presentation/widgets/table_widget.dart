@@ -20,7 +20,17 @@ class TableWidget extends StatelessWidget {
                 ),
               ),
             ),
-            ...state.users,
+            ...List.generate(
+              state.users.length,
+              (index) => DataColumn(
+                label: Text(
+                  state.users[index].userName,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
           ],
           rows: <DataRow>[
             DataRow(
@@ -28,7 +38,7 @@ class TableWidget extends StatelessWidget {
                 const DataCell(
                   Text('1'),
                 ),
-                ...state.resultsOfFirstRounds!.resultOfTheRound,
+                ...state.resultsOfFirstRounds.resultOfTheRound,
               ],
             ),
             DataRow(
@@ -36,7 +46,7 @@ class TableWidget extends StatelessWidget {
                 const DataCell(
                   Text('2'),
                 ),
-                ...state.resultsOfSecondRounds!.resultOfTheRound,
+                ...state.resultsOfSecondRounds.resultOfTheRound,
               ],
             ),
             DataRow(
@@ -44,7 +54,7 @@ class TableWidget extends StatelessWidget {
                 const DataCell(
                   Text('3'),
                 ),
-                ...state.resultsOfThirdRounds!.resultOfTheRound,
+                ...state.resultsOfThirdRounds.resultOfTheRound,
               ],
             ),
             DataRow(
@@ -52,7 +62,7 @@ class TableWidget extends StatelessWidget {
                 const DataCell(
                   Text('4'),
                 ),
-                ...state.resultsOfFourthRounds!.resultOfTheRound,
+                ...state.resultsOfFourthRounds.resultOfTheRound,
               ],
             ),
             DataRow(
@@ -60,7 +70,7 @@ class TableWidget extends StatelessWidget {
                 const DataCell(
                   Text('5'),
                 ),
-                ...state.resultsOfFifthRounds!.resultOfTheRound,
+                ...state.resultsOfFifthRounds.resultOfTheRound,
               ],
             ),
             DataRow(

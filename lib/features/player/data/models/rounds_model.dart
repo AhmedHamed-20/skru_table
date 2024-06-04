@@ -4,7 +4,7 @@ class RoundsModel {
   final List<DataCell> resultOfTheRound;
   final List<TextEditingController> listOfTheRoundControllers;
 
-  RoundsModel(
+  const RoundsModel(
       {required this.resultOfTheRound,
       required this.listOfTheRoundControllers});
 }

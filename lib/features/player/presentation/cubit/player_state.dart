@@ -4,22 +4,37 @@ part of 'player_cubit.dart';
 class PlayerState {
   const PlayerState({
     this.users = const [],
-    this.resultsOfFirstRounds,
-    this.resultsOfFourthRounds,
-    this.resultsOfSecondRounds,
-    this.resultsOfThirdRounds,
-    this.resultsOfFifthRounds,
+    this.resultsOfFirstRounds = const RoundsModel(
+      listOfTheRoundControllers: [],
+      resultOfTheRound: [],
+    ),
+    this.resultsOfFourthRounds = const RoundsModel(
+      listOfTheRoundControllers: [],
+      resultOfTheRound: [],
+    ),
+    this.resultsOfSecondRounds = const RoundsModel(
+      listOfTheRoundControllers: [],
+      resultOfTheRound: [],
+    ),
+    this.resultsOfThirdRounds = const RoundsModel(
+      listOfTheRoundControllers: [],
+      resultOfTheRound: [],
+    ),
+    this.resultsOfFifthRounds = const RoundsModel(
+      listOfTheRoundControllers: [],
+      resultOfTheRound: [],
+    ),
     this.totalPointsListOfEachPlayer = const [],
   });
-  final List<DataColumn> users;
-  final RoundsModel? resultsOfFirstRounds;
-  final RoundsModel? resultsOfSecondRounds;
-  final RoundsModel? resultsOfThirdRounds;
-  final RoundsModel? resultsOfFourthRounds;
-  final RoundsModel? resultsOfFifthRounds;
+  final List<UserModel> users;
+  final RoundsModel resultsOfFirstRounds;
+  final RoundsModel resultsOfSecondRounds;
+  final RoundsModel resultsOfThirdRounds;
+  final RoundsModel resultsOfFourthRounds;
+  final RoundsModel resultsOfFifthRounds;
   final List<DataCell> totalPointsListOfEachPlayer;
   PlayerState copyWith({
-    List<DataColumn>? users,
+    List<UserModel>? users,
     RoundsModel? resultsOfFirstRounds,
     RoundsModel? resultsOfSecondRounds,
     RoundsModel? resultsOfThirdRounds,
