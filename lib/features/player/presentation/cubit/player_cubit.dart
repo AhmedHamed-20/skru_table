@@ -142,6 +142,33 @@ class PlayerCubit extends Cubit<PlayerState> {
     calculateTotalPointsForEachPlayer();
   }
 
+  void removeAllPlayers() {
+    emit(state.copyWith(
+      users: const [],
+      resultsOfFirstRounds: const RoundsModel(
+        resultOfTheRound: [],
+        listOfTheRoundControllers: [],
+      ),
+      resultsOfSecondRounds: const RoundsModel(
+        resultOfTheRound: [],
+        listOfTheRoundControllers: [],
+      ),
+      resultsOfThirdRounds: const RoundsModel(
+        resultOfTheRound: [],
+        listOfTheRoundControllers: [],
+      ),
+      resultsOfFourthRounds: const RoundsModel(
+        resultOfTheRound: [],
+        listOfTheRoundControllers: [],
+      ),
+      resultsOfFifthRounds: const RoundsModel(
+        resultOfTheRound: [],
+        listOfTheRoundControllers: [],
+      ),
+      totalPointsListOfEachPlayer: const [],
+    ));
+  }
+
   void calculateTotalPointsForEachPlayer() {
     List<DataCell> totalPointsList = List.generate(state.users.length, (index) {
       int resultOfEachPlayer = 0;
