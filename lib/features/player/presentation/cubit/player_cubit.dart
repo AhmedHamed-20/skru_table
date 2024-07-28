@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:skru_table/extensions.dart';
 import 'package:skru_table/features/player/data/models/rounds_model.dart';
 import 'package:skru_table/features/player/data/models/user_model.dart';
 import 'package:skru_table/features/player/presentation/widgets/cell_widget.dart';
@@ -46,7 +49,8 @@ class PlayerCubit extends Cubit<PlayerState> {
           ...state.resultsOfFirstRounds.resultOfTheRound,
           DataCell(CellWidget(
             textEditingController: newFirstRoundControllers.last,
-            onValueChanged: (value) => onValueChangedTextField(value),
+            onValueChanged: (value) =>
+                onValueChangedTextField(value == '' ? '0' : value),
           )),
         ],
         listOfTheRoundControllers: newFirstRoundControllers,
@@ -56,7 +60,8 @@ class PlayerCubit extends Cubit<PlayerState> {
           ...state.resultsOfSecondRounds.resultOfTheRound,
           DataCell(CellWidget(
             textEditingController: newSecondRoundControllers.last,
-            onValueChanged: (value) => onValueChangedTextField(value),
+            onValueChanged: (value) =>
+                onValueChangedTextField(value == '' ? '0' : value),
           )),
         ],
         listOfTheRoundControllers: newSecondRoundControllers,
@@ -66,7 +71,8 @@ class PlayerCubit extends Cubit<PlayerState> {
           ...state.resultsOfThirdRounds.resultOfTheRound,
           DataCell(CellWidget(
             textEditingController: newThirdRoundControllers.last,
-            onValueChanged: (value) => onValueChangedTextField(value),
+            onValueChanged: (value) =>
+                onValueChangedTextField(value == '' ? '0' : value),
           )),
         ],
         listOfTheRoundControllers: newThirdRoundControllers,
@@ -76,7 +82,8 @@ class PlayerCubit extends Cubit<PlayerState> {
           ...state.resultsOfFourthRounds.resultOfTheRound,
           DataCell(CellWidget(
             textEditingController: newFourthRoundControllers.last,
-            onValueChanged: (value) => onValueChangedTextField(value),
+            onValueChanged: (value) =>
+                onValueChangedTextField(value == '' ? '0' : value),
           )),
         ],
         listOfTheRoundControllers: newFourthRoundControllers,
@@ -86,7 +93,8 @@ class PlayerCubit extends Cubit<PlayerState> {
           ...state.resultsOfFifthRounds.resultOfTheRound,
           DataCell(CellWidget(
             textEditingController: newFifthRoundControllers.last,
-            onValueChanged: (value) => onValueChangedTextField(value),
+            onValueChanged: (value) =>
+                onValueChangedTextField(value == '' ? '0' : value),
           )),
         ],
         listOfTheRoundControllers: newFifthRoundControllers,
@@ -172,16 +180,30 @@ class PlayerCubit extends Cubit<PlayerState> {
   void calculateTotalPointsForEachPlayer() {
     List<DataCell> totalPointsList = List.generate(state.users.length, (index) {
       int resultOfEachPlayer = 0;
-      resultOfEachPlayer += int.parse(
-          state.resultsOfFirstRounds.listOfTheRoundControllers[index].text);
-      resultOfEachPlayer += int.parse(
-          state.resultsOfSecondRounds.listOfTheRoundControllers[index].text);
-      resultOfEachPlayer += int.parse(
-          state.resultsOfThirdRounds.listOfTheRoundControllers[index].text);
-      resultOfEachPlayer += int.parse(
-          state.resultsOfFourthRounds.listOfTheRoundControllers[index].text);
-      resultOfEachPlayer += int.parse(
-          state.resultsOfFifthRounds.listOfTheRoundControllers[index].text);
+      log('++++++++++');
+      log(state.resultsOfSecondRounds.listOfTheRoundControllers[index].text
+          .trim()
+          .replaceWhiteSpaceOnTextEditingControllerByZero());
+      resultOfEachPlayer += int.parse(state
+          .resultsOfFirstRounds.listOfTheRoundControllers[index].text
+          .trim()
+          .replaceWhiteSpaceOnTextEditingControllerByZero());
+      resultOfEachPlayer += int.parse(state
+          .resultsOfSecondRounds.listOfTheRoundControllers[index].text
+          .trim()
+          .replaceWhiteSpaceOnTextEditingControllerByZero());
+      resultOfEachPlayer += int.parse(state
+          .resultsOfThirdRounds.listOfTheRoundControllers[index].text
+          .trim()
+          .replaceWhiteSpaceOnTextEditingControllerByZero());
+      resultOfEachPlayer += int.parse(state
+          .resultsOfFourthRounds.listOfTheRoundControllers[index].text
+          .trim()
+          .replaceWhiteSpaceOnTextEditingControllerByZero());
+      resultOfEachPlayer += int.parse(state
+          .resultsOfFifthRounds.listOfTheRoundControllers[index].text
+          .trim()
+          .replaceWhiteSpaceOnTextEditingControllerByZero());
       return DataCell(Center(
         child: Text(
           resultOfEachPlayer.toString(),
