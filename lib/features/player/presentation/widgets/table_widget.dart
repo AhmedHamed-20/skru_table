@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skru_table/features/player/presentation/cubit/player_cubit.dart';
+import 'package:skru_table/features/player/presentation/widgets/total_text_widget.dart';
 
 class TableWidget extends StatelessWidget {
   const TableWidget({super.key});
@@ -76,7 +77,7 @@ class TableWidget extends StatelessWidget {
             DataRow(
               cells: <DataCell>[
                 const DataCell(
-                  Text('Total'),
+                  TotalTextWidget(value: 'Total'),
                 ),
                 ...state.totalPointsListOfEachPlayer,
               ],

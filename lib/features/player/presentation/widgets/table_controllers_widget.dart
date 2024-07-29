@@ -32,7 +32,9 @@ class TableControllersWidget extends StatelessWidget {
                         },
                         child: Row(
                           children: [
-                            Text('Delete ${state.users[index].userName}'),
+                            Text(
+                              'Delete ${state.users[index].userName}',
+                            ),
                           ],
                         ),
                       ),
@@ -75,7 +77,9 @@ class TableControllersWidget extends StatelessWidget {
                       playerNameController.clear();
                       FocusManager.instance.primaryFocus?.unfocus();
                     },
-                    child: const Text('Add New Player')),
+                    child: const Text(
+                      'Add New Player',
+                    )),
               ],
             ),
           )

@@ -26,16 +26,35 @@ class _TableScreenState extends State<TableScreen> {
         title: const Text('Skru Table'),
         centerTitle: true,
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.purple.withOpacity(0.5),
-        onPressed: () {
-          BlocProvider.of<PlayerCubit>(context).removeAllPlayers();
-        },
-        child: const Text('Reset'),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(top: 12),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+              backgroundColor: Colors.green.withOpacity(0.5),
+              onPressed: () {
+                BlocProvider.of<PlayerCubit>(context)
+                    .resetAllPlayersScoreToZero();
+              },
+              child: const Icon(Icons.restart_alt),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            FloatingActionButton(
+              backgroundColor: Colors.red.withOpacity(0.5),
+              onPressed: () {
+                BlocProvider.of<PlayerCubit>(context).removeAllPlayers();
+              },
+              child: const Icon(Icons.delete),
+            ),
+          ],
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: const Padding(
-        padding: EdgeInsets.all(12),
+        padding: EdgeInsets.all(22),
         child: CustomScrollView(slivers: [
           SliverToBoxAdapter(child: TableWidget()),
           SliverToBoxAdapter(

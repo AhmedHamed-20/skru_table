@@ -1,11 +1,11 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:skru_table/extensions.dart';
 import 'package:skru_table/features/player/data/models/rounds_model.dart';
 import 'package:skru_table/features/player/data/models/user_model.dart';
 import 'package:skru_table/features/player/presentation/widgets/cell_widget.dart';
+
+import '../widgets/total_text_widget.dart';
 
 part 'player_state.dart';
 
@@ -177,13 +177,41 @@ class PlayerCubit extends Cubit<PlayerState> {
     ));
   }
 
+  void resetAllPlayersScoreToZero() {
+    for (var controller
+        in state.resultsOfFirstRounds.listOfTheRoundControllers) {
+      controller.text = '0';
+    }
+    for (var controller
+        in state.resultsOfSecondRounds.listOfTheRoundControllers) {
+      controller.text = '0';
+    }
+    for (var controller
+        in state.resultsOfThirdRounds.listOfTheRoundControllers) {
+      controller.text = '0';
+    }
+    for (var controller
+        in state.resultsOfFourthRounds.listOfTheRoundControllers) {
+      controller.text = '0';
+    }
+    for (var controller
+        in state.resultsOfFifthRounds.listOfTheRoundControllers) {
+      controller.text = '0';
+    }
+
+    emit(
+      state.copyWith(
+        totalPointsListOfEachPlayer: List.generate(
+            state.totalPointsListOfEachPlayer.length,
+            (index) =>
+                const DataCell(Center(child: TotalTextWidget(value: "0")))),
+      ),
+    );
+  }
+
   void calculateTotalPointsForEachPlayer() {
     List<DataCell> totalPointsList = List.generate(state.users.length, (index) {
       int resultOfEachPlayer = 0;
-      log('++++++++++');
-      log(state.resultsOfSecondRounds.listOfTheRoundControllers[index].text
-          .trim()
-          .replaceWhiteSpaceOnTextEditingControllerByZero());
       resultOfEachPlayer += int.parse(state
           .resultsOfFirstRounds.listOfTheRoundControllers[index].text
           .trim()
@@ -205,11 +233,7 @@ class PlayerCubit extends Cubit<PlayerState> {
           .trim()
           .replaceWhiteSpaceOnTextEditingControllerByZero());
       return DataCell(Center(
-        child: Text(
-          resultOfEachPlayer.toString(),
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
+        child: TotalTextWidget(value: resultOfEachPlayer.toString()),
       ));
     });
 
